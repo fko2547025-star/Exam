@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import bean.ClassNum;
@@ -32,7 +33,7 @@ public class ClassNumDao extends Dao{
 	        if (rSet.next()) {
 	            // リザルトセットが存在する場合
 	            // クラス番号インスタンスに検索結果をセット
-	            classNum.setClassNum(rSet.getString("class_num"));
+	            classNum.setClass_num(rSet.getString("class_num"));
 	            classNum.setSchool(sDao.get(rSet.getString("school_cd")));
 	        } else {
 	            // リザルトセットが存在しない場合

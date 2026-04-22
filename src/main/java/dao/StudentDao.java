@@ -152,7 +152,7 @@ public class StudentDao extends Dao{
 	        // プリペアードステートメントにSQL文をセット
 	        statement = connection.prepareStatement(baseSql + condition + conditionIsAttend + order);
 	        // プリペアードステートメントに学園名をバインド
-	        statement.setString(1, school.getId());
+	        statement.setString(1, school.getNo());
 	        // プリペアードステートメントに年度をバインド
 	        statement.setInt(2, entYear);
 	        // プリペアードステートメントを実行
