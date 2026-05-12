@@ -3,53 +3,58 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import bean.ClassNum;
 import bean.School;
-import bean.Subject;
-import dao.SubjectDao;
+import dao.ClassNumDao;
 import tool.Action;
 
-public class SubjectUpdateExecuteAction extends Action {
+public class ClassUpdateExecuteAction extends Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
         School school = (School)session.getAttribute("school");
-        SubjectDao dao = new SubjectDao();
+        ClassNumDao dao = new ClassNumDao();
 
         String cd = request.getParameter("cd");
-        String name = request.getParameter("name");
+        String newcd = request.getParameter("newcd");
         
         boolean hasError = false;
-        Subject current = dao.get(cd, school);
+        ClassNum current = dao.get(cd, school);
         if (current == null) {
-            request.setAttribute("deleteerror", "科目が存在していません。");
+            request.setAttribute("deleteerror", "クラスが存在していません。");
             request.setAttribute("cd", cd);
-            request.setAttribute("name", name);
             hasError = true;
         }
         
-        if (name == null || name.isBlank()) {
+        if (newcd == null || newcd.isBlank()) {
             request.setAttribute("error", "このフィールドを入力してください。");
+            hasError = true;
+        }else if (newcd.length() != 3) {
+            request.setAttribute("error", "クラス番号は3文字で入力してください");
+            hasError = true;
+        }
+        ClassNum exists = dao.get(newcd, school);
+        if (exists != null) {
+            request.setAttribute("error", "このクラス番号は既に登録されています");
             hasError = true;
         }
         
         if (hasError == true) {
             request.setAttribute("cd", cd);
-            request.setAttribute("name", name);
             request.setAttribute("school_cd", school.getCd());
 
-            request.getRequestDispatcher("subject_update.jsp")
+            request.getRequestDispatcher("class_update.jsp")
                    .forward(request, response);
             return;
         }
 
-        Subject subject = new Subject();
-        subject.setSchoolCd(school.getCd());
-        subject.setCd(cd);
-        subject.setName(name);
+        ClassNum class_num = new ClassNum();
+        class_num.setSchool(school);
+        class_num.setClass_num(cd);
 
-        dao.save(subject);
+        dao.save(class_num,newcd);
 
-        request.getRequestDispatcher("subject_update_done.jsp")
+        request.getRequestDispatcher("class_update_done.jsp")
                .forward(request, response);
     }
 }

@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import bean.School;
 import tool.Action;
 
-public class SubjectCreateAction extends Action{
+public class ClassCreateAction extends Action{
 	public void execute(
 		HttpServletRequest request, HttpServletResponse response
 		)throws Exception{
@@ -18,7 +18,7 @@ public class SubjectCreateAction extends Action{
 		
 		request.setAttribute("school_cd",school.getCd());
 		
-		request.getRequestDispatcher("subject_create.jsp")
+		request.getRequestDispatcher("class_create.jsp")
         .forward(request, response);
 	}
 	

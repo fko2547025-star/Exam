@@ -76,7 +76,8 @@ public class SubjectDao extends Dao {
 
     public boolean save(Subject subject) {
         String sql = """
-            INSERT INTO SUBJECT(SCHOOL_CD, CD, NAME)
+            MERGE INTO SUBJECT (SCHOOL_CD, CD, NAME)
+            KEY (SCHOOL_CD, CD)
             VALUES (?, ?, ?)
             """;
 
@@ -95,6 +96,7 @@ public class SubjectDao extends Dao {
 
         return false;
     }
+
 
     public boolean delete(Subject subject) {
         String sql = """

@@ -7,12 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import bean.School;
-import bean.Subject;
 import bean.Teacher;
-import dao.SubjectDao;
+import dao.TeacherDao;
 import tool.Action;
 
-public class SubjectListAction extends Action {
+public class TeacherListAction extends Action {
     public void execute(
         HttpServletRequest request, HttpServletResponse response
     ) throws Exception {
@@ -25,16 +24,15 @@ public class SubjectListAction extends Action {
                    .forward(request, response);
             return;
         }
-        School school = (School)session.getAttribute("school");
 
-        System.out.println("school = " + school);
+        School school = teacher.getSchool();
 
-        SubjectDao dao = new SubjectDao();
-        List<Subject> list = dao.filter(school);
+        TeacherDao dao = new TeacherDao();
+        List<Teacher> list = dao.filter(school);
 
         request.setAttribute("list", list);
 
-        request.getRequestDispatcher("/scoremanager/main/subject_list.jsp")
+        request.getRequestDispatcher("/scoremanager/main/teacher_list.jsp")
                .forward(request, response);
     }
 }

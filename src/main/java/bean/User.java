@@ -3,7 +3,7 @@ package bean;
 public class User {
 	private boolean isAuthenticated;
 	
-	public boolean isAUthenticated() {
+	public boolean isAuthenticated() {
 		return isAuthenticated;
 	}
 	public void setAuthenticated(boolean isAuthenticated) {

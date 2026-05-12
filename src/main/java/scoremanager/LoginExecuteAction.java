@@ -20,18 +20,24 @@ public class LoginExecuteAction extends Action {
         TeacherDao dao = new TeacherDao();
         Teacher teacher = dao.login(id, password);
 
+        // ▼ ログイン失敗
         if (teacher == null) {
             request.setAttribute("error", "IDまたはパスワードが違います");
-            request.getRequestDispatcher("/scoremanager/login.jsp")
+            request.getRequestDispatcher("/scoremanager/main/login.jsp")
                    .forward(request, response);
             return;
         }
 
+        // ▼ ログイン成功 → 認証フラグを立てる
+        teacher.setAuthenticated(true);
+
+        // ▼ セッションへ保存（全 Action と統一）
         HttpSession session = request.getSession();
-        session.setAttribute("loginUser", teacher);
+        session.setAttribute("user", teacher);         
+        session.setAttribute("school", teacher.getSchool()); // ← ここが最重要
         session.setAttribute("loginUserName", teacher.getName());
 
-        response.sendRedirect(request.getContextPath() + "/scoremanager/menu.jsp");
-
+        // ▼ メニューへ遷移
+        response.sendRedirect(request.getContextPath() + "/scoremanager/main/menu.jsp");
     }
 }

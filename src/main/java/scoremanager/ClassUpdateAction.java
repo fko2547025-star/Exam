@@ -4,12 +4,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import bean.ClassNum;
 import bean.School;
-import bean.Subject;
-import dao.SubjectDao;
+import dao.ClassNumDao;
 import tool.Action;
 
-public class SubjectDeleteAction extends Action {
+public class ClassUpdateAction extends Action {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
@@ -17,14 +17,13 @@ public class SubjectDeleteAction extends Action {
 
         String cd = request.getParameter("cd");
 
-        SubjectDao dao = new SubjectDao();
-        Subject subject = dao.get(cd, school);
+        ClassNumDao dao = new ClassNumDao();
+        ClassNum class_num = dao.get(cd, school);
 
 
-        request.setAttribute("cd", subject.getCd());
-        request.setAttribute("name", subject.getName());
+        request.setAttribute("cd", class_num.getClass_num());
 
-        request.getRequestDispatcher("subject_delete.jsp")
+        request.getRequestDispatcher("class_update.jsp")
                .forward(request, response);
     }
 }
