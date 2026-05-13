@@ -41,6 +41,10 @@ public class StudentUpdateAction extends Action {
         }
 
         // 5. 変更画面（JSP）へフォワード
+<<<<<<< HEAD
         request.getRequestDispatcher("/scoremanager/main/student_update.jsp").forward(request, response);
+=======
+        request.getRequestDispatcher("student_update.jsp").forward(request, response);
+>>>>>>> branch 'master' of https://github.com/fko2547025-star/Exam.git
     }
 }
