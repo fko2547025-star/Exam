@@ -11,8 +11,8 @@
                 <li class="nav-item"><a class="nav-link" href="Menu.action">ホーム</a></li>
                 <li class="nav-item"><a class="nav-link" href="StudentList.action">学生管理</a></li>
                 <li class="nav-item"><a class="nav-link" href="TestList.action">成績管理</a></li>
-                <li class="nav-item"><a class="nav-link" href="ClassList.action">クラス管理</a></li>
                 <li class="nav-item"><a class="nav-link" href="SubjectList.action">科目管理</a></li>
+                <li class="nav-item"><a class="nav-link" href="ClassList.action">クラス管理</a></li>
                 <li class="nav-item"><a class="nav-link active" href="TeacherList.action">ユーザ管理</a></li>
 
                 <c:choose>
