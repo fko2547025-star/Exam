@@ -45,7 +45,7 @@
 	            	<i class="bi bi-pencil fs-1 text-primary mb-2"></i>
 	                <h5 class="card-title fw-bold">科目を新規登録</h5>
 	                <p class="card-text text-muted">新しい科目を追加します</p>
-	                <a href="scoremanager/main/subject_create.jsp" class="stretched-link"></a>
+	                <a href="subject_create.jsp" class="stretched-link"></a>
 	            </div>
 	        </div>
 	    </div>

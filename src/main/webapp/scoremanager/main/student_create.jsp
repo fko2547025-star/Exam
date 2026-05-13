@@ -3,26 +3,27 @@
 <jsp:include page="/header.jsp"/>
 <div class="layout">
 
-  <!-- ▼ サイドバー -->
-  <aside class="sidebar">
-    <nav>
-      <ul>
-   
-        <li><a href="Menu.action">メニュー</a></li>
-
-        <li><a href="StudentList.action">学生管理</a></li>
-
-        <li class="label">成績管理</li>
-        
-        <li class="child"><a href="test_regist.jsp">成績登録</a></li>
-        
-        <li class="child"><a href="test_list.jsp">成績参照</a></li>
-        
-        <li><a href="subject_list.jsp">科目管理</a></li>
-        
-      </ul>
+ <body>
+    <!-- ナビゲーションバー -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+        <div class="container-fluid">
+            <span class="navbar-brand fw-bold">得点管理システム</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="Menu.action">ホーム</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="StudentList.action">学生管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="TestList.action">成績管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="SubjectList.action">科目管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ClassList.action">クラス管理</a></li>
+                    <li class="nav-item"><a class="nav-link" href="TeacherList.action">ユーザ管理</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
-  </aside>
+
 <section class="me-4">
 
     <h2 class="h3 mb-4 fw-normal bg-secondary bg-opacity-10 py-2 px-4 mt-3">
@@ -91,19 +92,7 @@
     </form>
 
 </section>
-<style>
-.sidebar {
-    width: 200px;
-    position: fixed;
-    top: 60px; /* header の高さに合わせる */
-    left: 0;
-    height: 100%;
-    background-color: #ffffff;
-    padding: 20px;
-}
 
-section.me-4 {
-    margin-left: 220px; /* サイドバーの幅 + 余白 */
-}
-</style>
-<jsp:include page="/footer.html"/>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+<jsp:include page="/footer.jsp"/>
