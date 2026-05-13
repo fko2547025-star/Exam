@@ -24,7 +24,11 @@ public class TeacherCreateExecuteAction extends Action {
         if (id == null || id.isEmpty()) {
             request.setAttribute("errorId", "このフィールドを入力してください");
             hasError = true;
+        } else if (!id.matches("^[A-Za-z0-9]+$")) {
+            request.setAttribute("errorId", "IDは英字または数字のみ使用できます");
+            hasError = true;
         }
+
         if (password == null || password.isEmpty()) {
             request.setAttribute("errorPass", "このフィールドを入力してください");
             hasError = true;

@@ -62,6 +62,7 @@ public class StudentCreateExecuteAction extends Action {
         student.setNo(no);
         student.setName(name);
         student.setClassNum(class_num); 
+        student.setAttend(true);
         dao.save(student);
         
         request.getRequestDispatcher("student_create_done.jsp")

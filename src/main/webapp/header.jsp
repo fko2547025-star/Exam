@@ -1,66 +1,46 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+<!DOCTYPE html>
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>得点管理システム</title>
+    <title>得点管理システム - メインメニュー</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rounded+Mplus+1c:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+
+    <!-- ▼ カードホバー効果 -->
+    <style>
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+        }
+        .card-hover i {
+            transition: 0.2s;
+        }
+        .card-hover:hover i {
+            transform: scale(1.15);
+        }
+	    body {
+	        font-family: "Rounded Mplus 1c", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+	        font-weight: 700; /* ← 太字をデフォルトに */
+	    }
+    </style>
+    
 </head>
-<body>
-<header class="header-area">
-    <!-- 全画面共通ヘッダー -->
-    <h1 class="page-title">得点管理システム</h1>
+<body style="
+    background: radial-gradient(circle at 20% 20%, #ffffff, #eef5ff, #dce9ff);
+">
 
-    <div class="header-right">
-
-        <!-- ▼ ログインしていない時だけログインボタンを表示 -->
-        <c:if test="${empty loginUserName}">
-            <a href="<%= request.getContextPath() %>/Login.action" class="logout-link">ログイン</a>
-        </c:if>
-
-        <!-- ▼ ログイン後のみ表示 -->
-        <c:if test="${not empty loginUserName}">
-            <span class="login-user">${loginUserName} 様</span>
-            <a href="<%= request.getContextPath() %>/Logout.action" class="logout-link">ログアウト</a>
-        </c:if>
-
-    </div>
-
-</header>
-
-<style>
-    .header-area {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 20px;
-        margin-left: 100px;
-        border-bottom: 1px solid #ccc;
-    }
-
-    .page-title {
-        font-size: 24px;
-        margin: 0;
-    }
-
-    .header-right {
-        display: flex;
-        align-items: center;
-    }
-
-    .login-user {
-        margin-right: 20px;
-        font-weight: bold;
-    }
-
-    .logout-link {
-        text-decoration: none;
-        color: #007bff;
-        font-weight: bold;
-        margin-left: 15px;
-    }
-</style>
-</body>
 

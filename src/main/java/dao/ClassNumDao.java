@@ -110,10 +110,11 @@ public class ClassNumDao extends Dao {
             throw e;
         }
     }
-    public boolean delete(ClassNum class_num) {
+    public boolean delete(ClassNum class_num) throws Exception {
         String sql = """
-            DELETE FROM CLASSNUM
-            WHERE SCHOOL_CD = ? AND CD = ?
+            DELETE FROM class_num
+             WHERE school_cd = ?
+               AND class_num = ?
             """;
 
         try (Connection con = getConnection();
@@ -125,10 +126,9 @@ public class ClassNumDao extends Dao {
             return ps.executeUpdate() == 1;
 
         } catch (Exception e) {
-            e.printStackTrace();
+            throw e; // ここは他メソッドと同じく投げた方がデバッグしやすい
         }
-
-        return false;
     }
+
 
 }

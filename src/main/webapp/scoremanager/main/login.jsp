@@ -1,54 +1,119 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<title>ログイン</title>
-<link rel="stylesheet" href="../css/login.css">
+    <meta charset="UTF-8">
+    <title>ログイン - 得点管理システム</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #0d6efd 0%, #4dabf7 100%);
+            min-height: 100vh;
+        }
+
+        .login-wrapper {
+            max-width: 420px;
+            width: 100%;
+        }
+
+        .login-card {
+            border-radius: 12px;
+            padding: 32px;
+        }
+
+        .system-title {
+            font-size: 26px;
+            font-weight: 800;
+            color: #0d6efd;
+        }
+
+        .login-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .form-control {
+            height: 48px;
+            font-size: 15px;
+        }
+
+        .btn-login {
+            height: 48px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .card-shadow {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="page-wrapper">
+<!-- ▼ ログアウト後メッセージ -->
+<c:if test="${not empty logoutMessage}">
+    <div class="alert alert-info text-center m-0 rounded-0">
+        ${logoutMessage}
+    </div>
+</c:if>
 
-    <header class="header">
-        <h1 class="system-name">得点管理システム</h1>
-    </header>
+<!-- ▼ ログインカード中央配置 -->
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
 
-    <main class="login-container">
+    <div class="login-wrapper">
 
-        <h2 class="login-title">ログイン</h2>
+        <div class="card login-card card-shadow">
 
-        <c:if test="${not empty error}">
-            <div class="error">${error}</div>
-        </c:if>
+            <!-- システム名 -->
+            <h1 class="text-center mb-3 system-title">得点管理システム</h1>
 
-        <form action="LoginExecute.action" method="post">
+            <!-- ログインタイトル -->
+            <h2 class="text-center login-title mb-4">ログイン</h2>
 
-            <input type="text"
-                   name="id"
-                   class="input"
-                   placeholder="ID">
+            <!-- ▼ ログインエラー -->
+            <c:if test="${not empty error}">
+                <div class="alert alert-danger text-center">${error}</div>
+            </c:if>
 
-            <input type="password"
-                   name="password"
-                   id="password"
-                   class="input"
-                   placeholder="パスワード">
+            <form action="LoginExecute.action" method="post">
 
-            <div class="checkbox-area">
-                <input type="checkbox" id="showPass">
-                <label for="showPass">パスワードを表示</label>
-            </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">ID</label>
+                    <input type="text"
+                           name="id"
+                           class="form-control"
+                           placeholder="IDを入力"
+                           value="${id}">
+                </div>
 
-            <button type="submit" class="login-btn">ログイン</button>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">パスワード</label>
+                    <input type="password"
+                           name="password"
+                           id="password"
+                           class="form-control"
+                           placeholder="パスワードを入力">
+                </div>
 
-        </form>
+                <div class="form-check mb-3">
+                    <input type="checkbox" id="showPass" class="form-check-input">
+                    <label for="showPass" class="form-check-label">パスワードを表示</label>
+                </div>
 
-    </main>
+                <button type="submit" class="btn btn-primary w-100 btn-login">
+                    ログイン
+                </button>
 
-    <footer class="footer">
-        <small>© 2024 得点管理システム</small>
-    </footer>
+            </form>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -59,5 +124,6 @@ document.getElementById("showPass").addEventListener("change", function() {
 });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

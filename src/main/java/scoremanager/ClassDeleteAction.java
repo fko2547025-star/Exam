@@ -23,7 +23,7 @@ public class ClassDeleteAction extends Action {
 
         request.setAttribute("cd", class_num.getClass_num());
 
-        request.getRequestDispatcher("subject_delete.jsp")
+        request.getRequestDispatcher("class_delete.jsp")
                .forward(request, response);
     }
 }
