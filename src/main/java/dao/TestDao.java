@@ -110,5 +110,9 @@ public class TestDao extends Dao {
 
         return false;
     }
-}
 
+	public List<Test> list(List<Student> studentList, Subject subject, School school, int num) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+}

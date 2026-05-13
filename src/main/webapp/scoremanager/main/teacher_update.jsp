@@ -51,7 +51,7 @@
                     <input type="hidden" name="id" value="${id}">
                 </div>
 
-                <!-- PASSWORD（変更不可） -->
+                <!-- PASSWORD-->
                 <div class="mb-4">
                     <label class="form-label fw-bold">PASSWORD</label>
                     <input type="password" class="form-control" value="${password}" disabled>

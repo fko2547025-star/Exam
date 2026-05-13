@@ -58,8 +58,20 @@
                 <!-- PASSWORD -->
                 <div class="mb-4">
                     <label class="form-label fw-bold">PASSWORD</label>
-                    <input type="password" name="password" class="form-control"
-                           value="${password}" placeholder="PASSWORDを入力してください">
+                    <input type="password" name="password" id="password" class="form-control"
+					       placeholder="PASSWORDを入力してください">
+					
+					<script>
+					document.getElementById("password").addEventListener("input", function () {
+					    const input = this;
+					    input.type = "text";
+					
+					    clearTimeout(input._timer);
+					    input._timer = setTimeout(() => {
+					        input.type = "password";
+					    }, 500);
+					});
+					</script>
 
                     <c:if test="${not empty errorPass}">
                         <div class="text-warning mt-1">${errorPass}</div>
@@ -69,8 +81,20 @@
                 <!-- PASSWORD(確認) -->
                 <div class="mb-4">
                     <label class="form-label fw-bold">PASSWORD（確認）</label>
-                    <input type="password" name="password2" class="form-control"
+                    <input type="password" name="password2" id="password2" class="form-control"
                            value="${password2}" placeholder="PASSWORD（確認）を入力してください">
+
+					<script>
+					document.getElementById("password2").addEventListener("input", function () {
+					    const input = this;
+					    input.type = "text";
+					
+					    clearTimeout(input._timer);
+					    input._timer = setTimeout(() => {
+					        input.type = "password";
+					    }, 500);
+					});
+					</script>
 
                     <c:if test="${not empty errorPass2}">
                         <div class="text-warning mt-1">${errorPass2}</div>

@@ -43,36 +43,35 @@ public class TeacherDao extends Dao {
 	}
 
 	
-	public List<Teacher> filter(School school) {
-
+	public List<Teacher> filter(School school, String sort) throws Exception {
 	    List<Teacher> list = new ArrayList<>();
 
-	    String sql = "SELECT ID, PASSWORD, NAME, SCHOOL_CD FROM TEACHER WHERE SCHOOL_CD = ? ORDER BY ID";
+	    String order = "ID"; // デフォルト
+	    if ("name".equals(sort)) {
+	        order = "NAME";
+	    }
+
+	    String sql = "SELECT ID, PASSWORD, NAME, SCHOOL_CD FROM TEACHER WHERE SCHOOL_CD = ? ORDER BY " + order;
 
 	    try (Connection con = getConnection();
 	         PreparedStatement ps = con.prepareStatement(sql)) {
 
 	        ps.setString(1, school.getCd());
+	        ResultSet rs = ps.executeQuery();
 
-	        try (ResultSet rs = ps.executeQuery()) {
-	            while (rs.next()) {
-	                Teacher t = new Teacher();
-	                t.setId(rs.getString("ID"));
-	                t.setPassword(rs.getString("PASSWORD"));
-	                t.setName(rs.getString("NAME"));
+	        while (rs.next()) {
+	            Teacher t = new Teacher();
+	            t.setId(rs.getString("ID"));
+	            t.setPassword(rs.getString("PASSWORD"));
+	            t.setName(rs.getString("NAME"));
 
-	                School s = new School();
-	                s.setCd(rs.getString("SCHOOL_CD"));
-	                t.setSchool(s);
+	            School s = new School();
+	            s.setCd(rs.getString("SCHOOL_CD"));
+	            t.setSchool(s);
 
-	                list.add(t);
-	            }
+	            list.add(t);
 	        }
-
-	    } catch (Exception e) {
-	        e.printStackTrace();
 	    }
-
 	    return list;
 	}
 
@@ -132,7 +131,48 @@ public class TeacherDao extends Dao {
         return false;
     }
 
+    public List<Teacher> search(School school, String keyword, String sort) throws Exception {
+        List<Teacher> list = new ArrayList<>();
 
+        String order = "ID";
+        if ("name".equals(sort)) {
+            order = "NAME";
+        }
+
+        String sql = """
+        	    SELECT ID, PASSWORD, NAME, SCHOOL_CD
+        	    FROM TEACHER
+        	    WHERE SCHOOL_CD = ?
+        	      AND (ID LIKE ? OR NAME LIKE ?)
+        	    ORDER BY 
+        	""" + order;
+
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, school.getCd());
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, "%" + keyword + "%");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Teacher t = new Teacher();
+                t.setId(rs.getString("ID"));
+                t.setPassword(rs.getString("PASSWORD"));
+                t.setName(rs.getString("NAME"));
+
+                School s = new School();
+                s.setCd(rs.getString("SCHOOL_CD"));
+                t.setSchool(s);
+
+                list.add(t);
+            }
+        }
+        return list;
+    }
+
+    
     public boolean delete(Teacher teacher) {
         String sql = """
             DELETE FROM TEACHER
@@ -152,4 +192,8 @@ public class TeacherDao extends Dao {
 
         return false;
     }
+    
+    
 }
+
+

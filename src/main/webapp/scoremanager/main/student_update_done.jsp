@@ -1,12 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-</body>
-</html>
+<jsp:include page="header.jsp" />
+
+<div class="layout">
+
+    
+
+    <main class="student-list-container">
+        <h2>学生情報変更</h2>
+
+        <p class="student-update-message">変更が完了しました</p>
+
+        <ul class="student-update-menu">
+            <li><a href="StudentList.action">学生一覧</a></li>
+        </ul>
+    </main>
+
+</div> <jsp:include page="footer.jsp" />
+

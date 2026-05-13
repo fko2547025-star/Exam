@@ -65,7 +65,7 @@
 
 <!-- メインコンテンツ -->
 	<div class="container mt-4">
-	 <h2 class="h3 mb-4 bg-secondary bg-opacity-10 py-2 px-4">メインメニュー</h2>
+	 <h2 class="h3 mb-4 fw-bord bg-secondary bg-opacity-10 py-2 px-4">メインメニュー</h2>
 	
 	    <div class="row g-3 mb-4">
 	

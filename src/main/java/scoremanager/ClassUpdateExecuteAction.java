@@ -25,15 +25,19 @@ public class ClassUpdateExecuteAction extends Action {
             request.setAttribute("cd", cd);
             hasError = true;
         }
-        
-        if (newcd == null || newcd.isBlank()) {
-            request.setAttribute("error", "このフィールドを入力してください。");
+        ClassNum exists = dao.get(newcd, school);
+        if (newcd == null || newcd.isEmpty()) {
+            request.setAttribute("error", "このフィールドを入力してください");
             hasError = true;
-        }else if (newcd.length() != 3) {
+
+        } else if (!newcd.matches("^[0-9]+$")) {
+            request.setAttribute("error", "クラス番号は数字のみで入力してください");
+            hasError = true;
+
+        } else if (newcd.length() != 3) {
             request.setAttribute("error", "クラス番号は3文字で入力してください");
             hasError = true;
         }
-        ClassNum exists = dao.get(newcd, school);
         if (exists != null) {
             request.setAttribute("error", "このクラス番号は既に登録されています");
             hasError = true;

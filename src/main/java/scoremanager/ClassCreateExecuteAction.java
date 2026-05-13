@@ -21,6 +21,11 @@ public class ClassCreateExecuteAction extends Action {
         if (cd == null || cd.isEmpty()) {
             request.setAttribute("errorCd", "このフィールドを入力してください");
             hasError = true;
+
+        } else if (!cd.matches("^[0-9]+$")) {
+            request.setAttribute("errorCd", "クラス番号は数字のみで入力してください");
+            hasError = true;
+
         } else if (cd.length() != 3) {
             request.setAttribute("errorCd", "クラス番号は3文字で入力してください");
             hasError = true;

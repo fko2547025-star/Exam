@@ -18,6 +18,7 @@ public class TeacherCreateExecuteAction extends Action {
         String password = request.getParameter("password");
         String password2 = request.getParameter("password2");
         String name = request.getParameter("name");
+        TeacherDao dao = new TeacherDao();
         
         boolean hasError = false;
         
@@ -26,6 +27,9 @@ public class TeacherCreateExecuteAction extends Action {
             hasError = true;
         } else if (!id.matches("^[A-Za-z0-9]+$")) {
             request.setAttribute("errorId", "IDは英字または数字のみ使用できます");
+            hasError = true;
+        }else if (dao.get(id) != null) {
+            request.setAttribute("errorId", "このIDは既に使用されています");
             hasError = true;
         }
 
@@ -46,13 +50,13 @@ public class TeacherCreateExecuteAction extends Action {
         if (hasError == true) {
             request.setAttribute("id", id);
             request.setAttribute("password", password);
+            request.setAttribute("password2", password2);
             request.setAttribute("name", name);
 
             request.getRequestDispatcher("teacher_create.jsp")
                    .forward(request, response);
             return;
         }
-        TeacherDao dao = new TeacherDao();
         
         Teacher teacher = new Teacher();
         teacher.setId(id);

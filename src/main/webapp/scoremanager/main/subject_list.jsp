@@ -35,7 +35,7 @@
 <!-- ▼ メインコンテンツ -->
 <div class="container mt-4">
 
-    <h2 class="h3 mb-4 fw-normal bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
+    <h2 class="h3 mb-4 fw-bord bg-secondary bg-opacity-10 py-2 px-4">科目管理</h2>
 
     <!-- 新規登録カード -->
     <div class="row mb-4">
@@ -45,11 +45,21 @@
 	            	<i class="bi bi-pencil fs-1 text-primary mb-2"></i>
 	                <h5 class="card-title fw-bold">科目を新規登録</h5>
 	                <p class="card-text text-muted">新しい科目を追加します</p>
-	                <a href="scoremanager/main/subject_create.jsp" class="stretched-link"></a>
+	                <a href="subject_create.jsp" class="stretched-link"></a>
 	            </div>
 	        </div>
 	    </div>
 	</div>
+	
+	<form action="SubjectList.action" method="get" class="row mb-4">
+	    <div class="col-md-4">
+	        <input type="text" name="keyword" class="form-control"
+	               value="${param.keyword}" placeholder="科目コード または 科目名で検索">
+	    </div>
+	    <div class="col-md-2">
+	        <button class="btn btn-primary w-100">検索</button>
+	    </div>
+	</form>
 
 
     <!-- ▼ 科目一覧 -->

@@ -118,4 +118,35 @@ public class SubjectDao extends Dao {
 
         return false;
     }
+    
+    public List<Subject> search(School school, String keyword) throws Exception {
+        List<Subject> list = new ArrayList<>();
+
+        String sql = """
+            SELECT SCHOOL_CD, CD, NAME
+            FROM SUBJECT
+            WHERE SCHOOL_CD = ?
+              AND (CD LIKE ? OR NAME LIKE ?)
+            ORDER BY CD
+            """;
+
+        try (Connection con = getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, school.getCd());
+            ps.setString(2, "%" + keyword + "%");
+            ps.setString(3, "%" + keyword + "%");
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Subject s = new Subject();
+                s.setCd(rs.getString("CD"));
+                s.setName(rs.getString("NAME"));
+                s.setSchoolCd(rs.getString("SCHOOL_CD"));
+                list.add(s);
+            }
+        }
+        return list;
+    }
+
 }

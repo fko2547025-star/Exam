@@ -28,9 +28,15 @@ public class SubjectListAction extends Action {
         School school = (School)session.getAttribute("school");
 
         System.out.println("school = " + school);
-
+        String keyword = request.getParameter("keyword");
         SubjectDao dao = new SubjectDao();
-        List<Subject> list = dao.filter(school);
+        List<Subject> list;
+
+        if (keyword != null && !keyword.isBlank()) {
+            list = dao.search(school, keyword);
+        } else {
+            list = dao.filter(school);
+        }
 
         request.setAttribute("list", list);
 
