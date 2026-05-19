@@ -38,9 +38,31 @@
 	    }
     </style>
     
-</head>
-<body style="
-    background: radial-gradient(circle at 20% 20%, #ffffff, #eef5ff, #dce9ff);
+    <body style="
+    background: linear-gradient(
+        135deg,
+        #fafafa 0%,   /* ほぼ白 */
+        #f2f2f2 40%,  /* 薄いグレー */
+        #e6e6e6 100%  /* 少しだけ暗いグレー */
+    );
 ">
+<style>
+.section-title {
+    background: linear-gradient(135deg, #bbdefb, #e3f2fd); /* カードと同じ薄い青 */
+    color: #000000; /* 黒文字 */
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 700;
+    margin-bottom: 25px;
+
+    /* ▼ 文字の縁取り（白） */
+    -webkit-text-stroke: 1px #ffffff;
+    text-stroke: 1px #ffffff;
+}
+
+</style>
+    
+
+
 
 

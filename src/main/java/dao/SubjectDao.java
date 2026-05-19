@@ -148,5 +148,18 @@ public class SubjectDao extends Dao {
         }
         return list;
     }
+    
+    public void deleteByCd(String schoolCd, String cd) throws Exception {
+        String sql = "DELETE FROM subject WHERE school_cd=? AND cd=?";
+
+        try (Connection con = getConnection();
+             PreparedStatement st = con.prepareStatement(sql)) {
+
+            st.setString(1, schoolCd);
+            st.setString(2, cd);
+            st.executeUpdate();
+        }
+    }
+
 
 }

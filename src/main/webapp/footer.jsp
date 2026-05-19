@@ -1,10 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<!-- ▼ フッター全体 -->
-<footer class="text-center py-3 mt-5" 
-        style="color:#666; font-size:14px; background:rgba(0,0,0,0.02);">
+<footer class="text-center py-3 mt-5 navbar-dark shadow-sm"
+        style="background:#90c8ff; color:#fff; font-size:14px;">
 
     <div>&copy; 2026 TIC</div>
-    <div>teamB</div>
+    <div>teamB-制作課題</div>
 
 </footer>

@@ -1,36 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <jsp:include page="/header.jsp"/>
+<jsp:include page="nav.jsp"/>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <span class="navbar-brand fw-bold">得点管理システム</span>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
 
-                <li class="nav-item"><a class="nav-link" href="Menu.action">ホーム</a></li>
-                <li class="nav-item"><a class="nav-link" href="StudentList.action">学生管理</a></li>
-                <li class="nav-item"><a class="nav-link" href="TestList.action">成績管理</a></li>
-                <li class="nav-item"><a class="nav-link active" href="SubjectList.action">科目管理</a></li>
-                <li class="nav-item"><a class="nav-link" href="ClassList.action">クラス管理</a></li>
-                <li class="nav-item"><a class="nav-link" href="TeacherList.action">ユーザ管理</a></li>
-
-                <c:choose>
-                    <c:when test="${not empty loginUserName}">
-                        <li class="nav-item">
-                            <span class="nav-link text-white">ようこそ、${loginUserName} 様</span>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="Logout.action">ログアウト</a></li>
-                    </c:when>
-                    <c:otherwise>
-                        <li class="nav-item"><a class="nav-link" href="Login.action">ログイン</a></li>
-                    </c:otherwise>
-                </c:choose>
-
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- ▼ メインコンテンツ -->
 <div class="container mt-4">
@@ -60,51 +33,70 @@
 	        <button class="btn btn-primary w-100">検索</button>
 	    </div>
 	</form>
+	
+	<c:if test="${not empty list}">
+	    <p class="text-muted mb-2">
+	        検索結果：${count} 件
+	    </p>
+	</c:if>
+	
 
 
     <!-- ▼ 科目一覧 -->
     <div class="card shadow-sm">
         <div class="card-body">
 
-            <table class="table table-hover align-middle">
-                <thead class="table-light">
-                    <tr>
-                        <th style="width: 20%">科目コード</th>
-                        <th>科目名</th>
-                        <th style="width: 10%">変更</th>
-                        <th style="width: 10%">削除</th>
-                    </tr>
-                </thead>
+            <form action="SubjectMultiDelete.action" method="post" id="multiDeleteForm">
 
-                <tbody>
-                    <c:forEach var="s" items="${list}">
-                        <tr>
-                            <td>${s.cd}</td>
-                            <td>${s.name}</td>
-                            <td>
-                                <a href="SubjectUpdate.action?cd=${s.cd}" class="text-primary fw-bold">変更</a>
-                            </td>
-                            <td>
-                                <a href="SubjectDelete.action?cd=${s.cd}" class="text-danger fw-bold">削除</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-
-                    <c:if test="${empty list}">
-                        <tr>
-                            <td colspan="4" class="text-center py-4 text-muted">
-                                科目情報が存在しませんでした。
-                            </td>
-                        </tr>
-                    </c:if>
-                </tbody>
-            </table>
+			    <table class="table table-hover align-middle">
+			        <thead class="table-light">
+			            <tr>
+			                <th style="width:5%">
+			                    <input type="checkbox" id="checkAll">
+			                </th>
+			                <th style="width:20%">科目コード</th>
+			                <th>科目名</th>
+			                <th style="width:10%">変更</th>
+			                <th style="width:10%">削除</th>
+			            </tr>
+			        </thead>
+			
+			        <tbody>
+			            <c:forEach var="s" items="${list}">
+			                <tr>
+			                    <td>
+			                        <input type="checkbox" name="cdList" value="${s.cd}">
+			                    </td>
+			                    <td>${s.cd}</td>
+			                    <td>${s.name}</td>
+			                    <td><a href="SubjectUpdate.action?cd=${s.cd}" class="text-primary fw-bold">変更</a></td>
+			                    <td><a href="SubjectDelete.action?cd=${s.cd}" class="text-danger fw-bold">削除</a></td>
+			                </tr>
+			            </c:forEach>
+			
+			            <c:if test="${empty list}">
+			                <tr>
+			                    <td colspan="5" class="text-center py-4 text-muted">
+			                        科目情報が存在しませんでした。
+			                    </td>
+			                </tr>
+			            </c:if>
+			        </tbody>
+			    </table>
+			
+			    <div class="text-end mt-3">
+			        <button type="submit" class="btn btn-danger">
+			            選択した科目を削除
+			        </button>
+			    </div>
+			
+			</form>
 
         </div>
     </div>
 
 </div>
+</body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 <jsp:include page="/footer.jsp"/>

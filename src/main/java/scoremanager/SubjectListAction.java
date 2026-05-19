@@ -25,9 +25,9 @@ public class SubjectListAction extends Action {
                    .forward(request, response);
             return;
         }
+
         School school = (School)session.getAttribute("school");
 
-        System.out.println("school = " + school);
         String keyword = request.getParameter("keyword");
         SubjectDao dao = new SubjectDao();
         List<Subject> list;
@@ -39,6 +39,7 @@ public class SubjectListAction extends Action {
         }
 
         request.setAttribute("list", list);
+        request.setAttribute("count", list.size());  // ★ 追加
 
         request.getRequestDispatcher("/scoremanager/main/subject_list.jsp")
                .forward(request, response);

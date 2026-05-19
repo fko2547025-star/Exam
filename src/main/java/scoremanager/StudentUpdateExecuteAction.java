@@ -51,11 +51,11 @@ public class StudentUpdateExecuteAction extends Action {
         } else {
             // 更新失敗：エラーメッセージをセットして元の画面へ（簡易的な例）
             request.setAttribute("error", "更新に失敗しました。");
-<<<<<<< HEAD
+
             request.getRequestDispatcher("/scoremanager/main/student_update.jsp").forward(request, response);
-=======
+
             request.getRequestDispatcher("student_update.jsp").forward(request, response);
->>>>>>> branch 'master' of https://github.com/fko2547025-star/Exam.git
+
         }
     }
 }

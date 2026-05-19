@@ -45,9 +45,7 @@ public class TeacherListAction extends Action {
         request.setAttribute("list", list);
         request.setAttribute("keyword", keyword);
         request.setAttribute("sort", sort);
-
-
-
+        request.setAttribute("count", list.size());
         request.getRequestDispatcher("/scoremanager/main/teacher_list.jsp")
                .forward(request, response);
     }

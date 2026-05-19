@@ -19,6 +19,23 @@ public class TeacherUpdateExecuteAction extends Action {
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         
+        boolean hasError = false;
+        
+        if (name == null || name.isEmpty()) {
+            request.setAttribute("errorName", "このフィールドを入力してください");
+            hasError = true;
+        }
+        
+        if (hasError == true) {
+            request.setAttribute("id", id);
+            request.setAttribute("password", password);
+            request.setAttribute("name", name);
+
+            request.getRequestDispatcher("teacher_update.jsp")
+                   .forward(request, response);
+            return;
+        }
+        
         Teacher teacher = new Teacher();
         teacher.setSchool(school);
         teacher.setId(id);
